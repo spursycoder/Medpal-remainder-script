@@ -9,9 +9,9 @@ mongoose.connect(process.env.MONGO_URI);
 
 // create a nodemailer transporter with your email credentials
 const transporter = nodemailer.createTransport({
-	service: "gmail",
+	service: "SendinBlue",
 	auth: {
-		user: "medpal96@gmail.com",
+		user: process.env.USER,
 		pass: process.env.PASS,
 	},
 });
@@ -56,7 +56,7 @@ cron.schedule("* * * * *", async () => {
 
 // helper function to convert hour to timeOfDay string
 function hourToTimeOfDay(hour) {
-	if (hour === 8) return "morning";
+	if (hour === 11) return "morning";
 	if (hour === 13) return "afternoon";
 	if (hour === 17) return "evening";
 	if (hour === 21) return "night";
