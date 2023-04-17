@@ -23,7 +23,7 @@ cron.schedule("* * * * *", async () => {
 	const hour = now.getHours();
 
 	// check if it's time to send emails for morning, afternoon, evening, and night
-	if (hour === 8 || hour === 13 || hour === 17 || hour === 21) {
+	if (hour === 11 || hour === 13 || hour === 17 || hour === 21) {
 		const medicines = await Medicines.find({
 			// find all medicines that have the respective timeOfDay set to true
 			[`timeOfDay.${hourToTimeOfDay(hour)}.yesOrNot`]: true,
