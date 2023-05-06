@@ -9,9 +9,9 @@ mongoose.connect(process.env.MONGO_URI);
 
 // create a nodemailer transporter with your email credentials
 const transporter = nodemailer.createTransport({
-	service: "SendinBlue",
+	service: "gmail",
 	auth: {
-		user: process.env.USER,
+		user: "medpal96@gmail.com",
 		pass: process.env.PASS,
 	},
 });
@@ -23,7 +23,7 @@ cron.schedule("* * * * *", async () => {
 	const hour = now.getHours();
 
 	// check if it's time to send emails for morning, afternoon, evening, and night
-	if (hour === 11 || hour === 13 || hour === 17 || hour === 21) {
+	if (hour === 8 || hour === 13 || hour === 17 || hour === 21) {
 		const medicines = await Medicines.find({
 			// find all medicines that have the respective timeOfDay set to true
 			[`timeOfDay.${hourToTimeOfDay(hour)}.yesOrNot`]: true,
@@ -56,7 +56,7 @@ cron.schedule("* * * * *", async () => {
 
 // helper function to convert hour to timeOfDay string
 function hourToTimeOfDay(hour) {
-	if (hour === 11) return "morning";
+	if (hour === 8) return "morning";
 	if (hour === 13) return "afternoon";
 	if (hour === 17) return "evening";
 	if (hour === 21) return "night";
